@@ -55,8 +55,8 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:10px 20px 30
 <script>
 const $=s=>document.querySelector(s);
 const PUZZLE_VERSION='1';
-const puzzleDate=()=>new Date().toISOString().slice(0,10);
-const storageKey=()=>`bluebirdle-game-${puzzleDate()}-${PUZZLE_VERSION}`;
+const today=()=>new Date().toISOString().slice(0,10);
+const storageKey=()=>`bluebirdle-game-${today()}-${PUZZLE_VERSION}`;
 let players=[], guesses=[], done=false, answer=null;
 function stableHash(text){let h=2166136261;for(let i=0;i<text.length;i++){h^=text.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
 function dayIndex(date,count){return count?stableHash('bluebirdle:'+date+':'+PUZZLE_VERSION)%count:0}
