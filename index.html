@@ -54,13 +54,14 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:10px 20px 30
 <footer>BLUEBIRDLE · Up the City 💙<br><span id="poolNote"></span></footer>
 <script>
 const $=s=>document.querySelector(s);
+const PUZZLE_VERSION='1';
+const puzzleDate=()=>new Date().toISOString().slice(0,10);
+const storageKey=()=>`bluebirdle-game-${puzzleDate()}-${PUZZLE_VERSION}`;
 let players=[], guesses=[], done=false, answer=null;
-const today=()=>new Date().toISOString().slice(0,10);
-function dayIndex(date,count){
-  // Stable daily sequence: same date and player list gives everyone the same answer.
-  const n=Number(date.replaceAll('-',''));
-  return (Math.imul(n,2654435761)>>>0)%count;
-}
+function stableHash(text){let h=2166136261;for(let i=0;i<text.length;i++){h^=text.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function dayIndex(date,count){return count?stableHash('bluebirdle:'+date+':'+PUZZLE_VERSION)%count:0}
+function loadDaily(){try{const v=JSON.parse(localStorage.getItem(storageKey())||'null');if(v&&Array.isArray(v.guesses))return v}catch{}return {guesses:[],done:false,won:false}}
+function saveDaily(){localStorage.setItem(storageKey(),JSON.stringify({guesses:guesses.map(p=>p.name),done,won:done&&guesses.some(p=>p.name===answer.name)}))}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function tile(label,value,correct,hint=''){
  return `<div class="tile ${correct?'good':''}"><div class="label">${label}</div><div class="value">${esc(value)}</div><div class="hint">${correct?'✓':hint}</div></div>`;
@@ -84,7 +85,7 @@ function saveResult(win){
 }
 function showStats(){let s=loadStats();$('#played').textContent=s.played;$('#won').textContent=s.won;$('#streak').textContent=s.streak;$('#best').textContent=s.best}
 function finish(win){
- done=true;$('#guessInput').disabled=true;$('#submit').disabled=true;
+ done=true;saveDaily();$('#guessInput').disabled=true;$('#submit').disabled=true;
  $('#result').hidden=false;
  $('#result').innerHTML=win?`<h2>BLUEBIRD FOUND! 🐦</h2>You got it in ${guesses.length} ${guesses.length===1?'guess':'guesses'}.`:`<h2>FULL TIME! ⚽</h2>The answer was <strong>${esc(answer.name)}</strong>.`;
  $('#result').innerHTML+=`<p>Come back tomorrow for the next Bluebirdle.</p><button class="secondary" id="share">Share result</button>`;
@@ -103,19 +104,26 @@ function submit(){
  if(!p){alert('Please choose a player from the suggestions.');return}
  if(guesses.some(x=>x.name===p.name)){alert('You have already guessed that player.');return}
  if(done)return;
- guesses.push(p);$('#guessInput').value='';
+ guesses.push(p);saveDaily();$('#guessInput').value='';
  $('#history').innerHTML=guesses.slice().reverse().map((x,i)=>renderGuess(x,guesses.length-1-i)).join('');
  $('#counter').textContent=`${8-guesses.length} guesses left`;
  if(p.name===answer.name)finish(true);else if(guesses.length>=8)finish(false);
 }
 async function init(){
  try{
-  const r=await fetch('./data/players.json');players=await r.json();
-  if(players.length<2)throw new Error('Add at least two players to players.json');
+  const r=await fetch('./data/players.json');if(!r.ok)throw new Error('Player data request failed');
+  players=await r.json();
+  if(!Array.isArray(players)||players.length<2)throw new Error('Add at least two players to players.json');
   answer=players[dayIndex(today(),players.length)];
   $('#playerList').innerHTML=players.map(p=>`<option value="${esc(p.name)}">`).join('');
   $('#dateLine').textContent=`Daily puzzle · ${today()} (UTC)`;
-  $('#poolNote').textContent=`Starter player pool: ${players.length} entries. Expand and verify the database before a full public launch.`;
+  $('#poolNote').textContent=`Player pool: ${players.length}. The historical database is still being expanded and checked.`;
+  const saved=loadDaily();
+  guesses=saved.guesses.map(name=>players.find(p=>p.name===name)).filter(Boolean);
+  $('#history').innerHTML=guesses.length?guesses.slice().reverse().map((x,i)=>renderGuess(x,guesses.length-1-i)).join():'<p class="muted">Your guesses will appear here.</p>';
+  $('#counter').textContent=`${Math.max(0,8-guesses.length)} guesses left`;
+  if(saved.done){done=true;const win=guesses.some(p=>p.name===answer.name);$('#guessInput').disabled=true;$('#submit').disabled=true;$('#result').hidden=false;$('#result').innerHTML=win?`<h2>BLUEBIRD FOUND! 🐦</h2>You got it in ${guesses.length} guesses.`:`<h2>FULL TIME! ⚽</h2>The answer was <strong>${esc(answer.name)}</strong>.`;}
+  if(guesses.length>=8&&!done)finish(false);
   $('#submit').addEventListener('click',submit);
   $('#guessInput').addEventListener('keydown',e=>{if(e.key==='Enter')submit()});
   showStats();
