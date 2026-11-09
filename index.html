@@ -193,7 +193,7 @@ async function init(){
    else if(e.key==='Enter'){
     if(!$('#playerSuggestions').hidden&&activeSuggestion>=0){e.preventDefault();const item=$('#playerSuggestions').querySelectorAll('.suggestion')[activeSuggestion];if(item)chooseSuggestion(item.querySelector('span').textContent)}
     else submit();
-   }else if(e.key==='Escape)closeSuggestions();
+   }else if(e.key==='Escape')closeSuggestions();
   });
   document.addEventListener('click',e=>{if(!e.target.closest('.autocomplete-wrap'))closeSuggestions()});
   showStats();
