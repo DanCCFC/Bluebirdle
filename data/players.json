@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Sol Bamba",
+    "signed": 2016,
+    "nationality": "Ivory Coast",
+    "position": "Defender",
+    "goals": 10,
+    "appearances": 118
+  },
+  {
+    "name": "Leandro Bacuna",
+    "signed": 2019,
+    "nationality": "Curaçao",
+    "position": "Midfielder",
+    "goals": 4,
+    "appearances": 115
+  },
+  {
+    "name": "Joel Bagan",
+    "signed": 2020,
+    "nationality": "Republic of Ireland",
+    "position": "Defender",
+    "goals": 4,
+    "appearances": 130
+  },
+  {
+    "name": "Ryan Allsop",
+    "signed": 2022,
+    "nationality": "England",
+    "position": "Goalkeeper",
+    "goals": 0,
+    "appearances": 44
+  },
+  {
+    "name": "Jak Alnwick",
+    "signed": 2022,
+    "nationality": "England",
+    "position": "Goalkeeper",
+    "goals": 0,
+    "appearances": 63
+  },
+  {
+    "name": "Sammy Ameobi",
+    "signed": 2015,
+    "nationality": "England",
+    "position": "Forward",
+    "goals": 1,
+    "appearances": 38
+  },
+  {
+    "name": "Peter Whittingham",
+    "signed": 2007,
+    "nationality": "England",
+    "position": "Midfielder",
+    "goals": 96,
+    "appearances": 457
+  }
+]
