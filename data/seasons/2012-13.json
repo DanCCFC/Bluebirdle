@@ -1,14 +1,14 @@
 {
   "season": "2012/13",
   "source": "https://www.11v11.com/teams/cardiff-city/tab/players/season/2013/",
-  "sourceNotes": "11v11 season squad table. A and S have been recorded as league starts and substitute appearances; goals are league goals. This is a season-level eligibility register, not yet the player's all-competition Cardiff career totals. Blank statistics in the source are recorded as zero. Only players with at least one start or substitute appearance are included.",
+  "sourceNotes": "11v11 season squad table. A and S have been recorded as league appearances and substitute appearances; goals are league goals. This is a season-level eligibility register, not yet the player's all-competition Cardiff career totals. Blank statistics in the source are recorded as zero. Only players with at least one start or substitute appearance are included.",
   "qualifyingPlayerCount": 38,
   "players": [
     {
       "name": "Leon Barnett",
       "nationality": "England",
       "position": "Defender",
-      "leagueStarts": 8,
+      "leagueApps": 8,
       "leagueSubApps": 0,
       "leagueAppearances": 8,
       "leagueGoals": 0
