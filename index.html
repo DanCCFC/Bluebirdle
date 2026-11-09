@@ -7,26 +7,41 @@
 <meta name="description" content="Bluebirdle — the daily Cardiff City player guessing game.">
 <title>Bluebirdle — Cardiff City daily guessing game</title>
 <style>
-:root{--blue:#123d70;--blue2:#1d5b9d;--ink:#172334;--muted:#657386;--bg:#f3f6fa;--card:#fff;--line:#dce4ed;--green:#218653;--amber:#d89a22;--red:#c84c4c}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-header{background:linear-gradient(135deg,#0d2d54,var(--blue2));color:#fff;padding:25px 16px 22px;text-align:center}
-.brand{font-weight:900;font-size:clamp(2rem,7vw,3rem);letter-spacing:.04em}.bird{font-size:1.2em}.tag{color:#d5e6fa;font-size:.9rem;letter-spacing:.12em;font-weight:700}
-main{width:min(760px,100% - 28px);margin:20px auto 48px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 4px 18px #102a4608}
-.topline{display:flex;justify-content:space-between;gap:12px;align-items:center}.pill{background:#e7f0fb;color:var(--blue);font-size:.78rem;font-weight:800;border-radius:99px;padding:6px 10px}
-h1{font-size:1.15rem;margin:0}p{margin:.55rem 0;color:var(--muted)}.muted{color:var(--muted);font-size:.9rem}
-.controls{display:flex;gap:8px;margin-top:14px}.controls input{min-width:0;flex:1;padding:13px 14px;border:1px solid #b9c8d8;border-radius:10px;font:inherit}
-button{border:0;border-radius:10px;background:var(--blue);color:#fff;font-weight:800;font:inherit;padding:12px 17px;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}button.secondary{background:#e8eef5;color:var(--blue)}
-.suggestions{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}.suggestions button{font-size:.86rem;padding:8px 11px;background:#eaf0f6;color:var(--ink);font-weight:600}
-.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.legend span{font-size:.78rem;border-radius:7px;padding:5px 8px;background:#f0f3f7;color:#455366}
-.board-wrap{overflow-x:auto;margin-top:14px;padding-bottom:4px}.board{min-width:620px}.board-head,.board-row{display:grid;grid-template-columns:minmax(112px,1.2fr) repeat(5,minmax(76px,1fr));gap:6px;align-items:stretch}.board-head{margin-bottom:7px}.board-head div{font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.04em;text-align:center;color:var(--muted);padding:4px 2px}.board-row{margin-bottom:6px}.player-name,.tile{min-width:0;min-height:66px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7px 5px;overflow-wrap:anywhere}.player-name{background:#e7edf4;font-weight:900}.tile{background:#edf1f5;color:var(--ink)}.tile.good{background:var(--green);color:#fff}.tile .value{font-size:clamp(.78rem,2.7vw,1rem);font-weight:800}.tile .hint{font-size:.72rem;margin-top:3px}.tile.empty,.player-name.empty{background:#f5f7fa;border:1px dashed #cbd5e1;color:#a5afbc}
-.result{text-align:center;padding:18px;background:#eef5fc;border-radius:12px;margin-top:14px}.result h2{margin:0 0 5px;color:var(--blue)}.countdown-label{font-size:.78rem;letter-spacing:.12em;font-weight:900;color:var(--muted);margin:18px 0 7px}.countdown{background:#101820;color:#fff;border-left:7px solid #e31b23;padding:12px 8px;font-size:clamp(1.65rem,7vw,2.7rem);font-weight:900;letter-spacing:.04em;font-variant-numeric:tabular-nums}
-footer{text-align:center;color:var(--muted);font-size:.8rem;padding:10px 20px 30px}
-@media(max-width:520px){.controls{flex-direction:column}.controls button{width:100%}.panel{padding:14px}.board{min-width:590px}.board-head,.board-row{grid-template-columns:105px repeat(5,1fr);gap:4px}.player-name,.tile{min-height:60px;padding:6px 3px}.tile .hint{font-size:.65rem}}
+:root{color-scheme:dark;--blue:#65b9ee;--blue-deep:#1769a6;--ink:#f2f5f9;--muted:#9ba9b9;--bg:#0b1017;--card:#151d27;--line:#293544;--green:#16834b;--green-bright:#1a9a59;--red:#e21d2b;--tile:#273240;--tile-empty:#111923}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% -20%,#18334c 0,#0b1017 55%);color:var(--ink);font:16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+header{position:relative;overflow:hidden;background:linear-gradient(110deg,#101b29,#123c60 58%,#10283f);color:#fff;padding:34px 16px 29px;text-align:center;border-bottom:1px solid #29435a}
+header:before{content:"";position:absolute;inset:0 auto 0 0;width:7px;background:var(--red)}
+.brand{font-weight:950;font-size:clamp(2.1rem,7vw,3.35rem);letter-spacing:.09em;line-height:1.05}.bird{display:inline-grid;place-items:center;width:35px;height:35px;margin-right:7px;border:2px solid #8bcdf4;border-radius:50%;font-size:.75rem;letter-spacing:0;vertical-align:8px;color:#a8dcfb}
+.tag{margin-top:9px;color:#b9d9ee;font-size:.72rem;letter-spacing:.2em;font-weight:800}
+main{width:min(850px,100% - 28px);margin:25px auto 52px}
+.panel{background:linear-gradient(145deg,#18222e,#141c26);border:1px solid var(--line);border-radius:13px;padding:20px;margin:15px 0;box-shadow:0 12px 35px #0003}
+.topline{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.pill{background:#183b56;color:#a9dcfa;font-size:.75rem;font-weight:850;border:1px solid #2a5878;border-radius:5px;padding:6px 10px;white-space:nowrap}
+h1{font-size:1.08rem;margin:0;font-weight:850;letter-spacing:.01em}p{margin:.65rem 0;color:var(--muted)}.muted{color:var(--muted);font-size:.88rem}
+.controls{display:flex;gap:9px;margin-top:16px}
+.controls input{min-width:0;flex:1;padding:14px 15px;border:1px solid #3b4c5f;border-radius:7px;background:#0e151e;color:#fff;font:inherit;outline:none;transition:border .15s,box-shadow .15s}
+.controls input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #65b9ee22}.controls input::placeholder{color:#748396}
+button{border:1px solid #3184bd;border-radius:7px;background:linear-gradient(180deg,#2387c8,#17669e);color:#fff;font-weight:850;font:inherit;padding:12px 22px;cursor:pointer;transition:filter .15s,transform .15s}
+button:hover:not(:disabled){filter:brightness(1.12);transform:translateY(-1px)}button:disabled{opacity:.4;cursor:not-allowed}button.secondary{background:#263647;border-color:#40556b;color:#dceaf5}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.legend span{font-size:.75rem;font-weight:750;border-radius:5px;padding:6px 9px;background:#202c39;color:#c0ccd8;border:1px solid #2e3c4b}
+.board-wrap{overflow-x:auto;margin-top:17px;padding-bottom:4px}.board{min-width:620px}
+.board-head,.board-row{display:grid;grid-template-columns:minmax(112px,1.2fr) repeat(5,minmax(76px,1fr));gap:6px;align-items:stretch}
+.board-head{margin-bottom:8px}.board-head div{font-size:.67rem;font-weight:900;text-transform:uppercase;letter-spacing:.09em;text-align:center;color:#aab7c5;padding:5px 2px}
+.board-row{margin-bottom:6px}.player-name,.tile{min-width:0;min-height:67px;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7px 5px;overflow-wrap:anywhere}
+.player-name{background:#242f3c;border-left:5px solid #397fb5;font-weight:850;color:#f2f5f9}.tile{background:var(--tile);color:#f4f7fb;border:1px solid #344253}.tile.good{background:var(--green);border-color:#1e9a5c;color:#fff}
+.tile .value{font-size:clamp(.8rem,2.7vw,1.02rem);font-weight:850}.tile .hint{font-size:.7rem;font-weight:850;margin-top:3px;color:#d3dfeb}
+.tile.empty,.player-name.empty{background:var(--tile-empty);border:1px dashed #334254;color:#647487}.player-name.empty{border-left:5px solid #334254}
+.result{text-align:center;padding:20px;background:#142b3e;border:1px solid #28516d;border-radius:9px;margin-top:17px}.result h2{margin:0 0 5px;color:#8bd0fa;font-size:1.35rem;letter-spacing:.04em}
+.countdown-label{font-size:.72rem;letter-spacing:.2em;font-weight:900;color:#a8b8c8;margin:20px 0 8px}
+.countdown{background:#070b10;color:#f4f7fb;border-left:7px solid var(--red);border-top:1px solid #283746;border-bottom:1px solid #283746;padding:11px 8px;font-size:clamp(1.8rem,8vw,3rem);font-weight:950;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:14px}.stat{background:#101923;border:1px solid #2b3948;border-radius:7px;padding:13px 8px;text-align:center}.stat strong{font-size:1.5rem;color:#fff}.stat .muted{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+footer{text-align:center;color:#8091a3;font-size:.78rem;padding:10px 20px 30px;letter-spacing:.04em}
+@media(max-width:560px){header{padding:28px 12px 24px}.tag{font-size:.63rem;letter-spacing:.14em}main{width:calc(100% - 18px);margin:15px auto 36px}.panel{padding:15px;margin:11px 0}.controls{flex-direction:column}.controls button{width:100%}.board{min-width:590px}.board-head,.board-row{grid-template-columns:105px repeat(5,1fr);gap:4px}.player-name,.tile{min-height:61px;padding:6px 3px}.tile .hint{font-size:.65rem}.stats{gap:5px}.stat{padding:10px 4px}.stat strong{font-size:1.25rem}}
 </style>
 </head>
 <body>
-<header><div class="brand"><span class="bird">🐦</span> BLUEBIRDLE</div><div class="tag">THE DAILY CARDIFF CITY PLAYER GAME</div></header>
+<header><div class="brand"><span class="bird">CC</span> BLUEBIRDLE</div><div class="tag">THE DAILY CARDIFF CITY PLAYER GAME</div></header>
 <main>
 <section class="panel">
  <div class="topline"><h1>Guess the mystery Bluebird</h1><span class="pill" id="counter">8 guesses left</span></div>
@@ -37,7 +52,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:10px 20px 30
   <button id="submit">Guess</button>
  </div>
  <div class="muted" id="dateLine"></div>
- <div class="legend"><span>🟩 Correct</span><span>⬆ Higher</span><span>⬇ Lower</span><span>Grey = not a match</span></div>
+ <div class="legend"><span>Green = correct</span><span>↑ Higher</span><span>↓ Lower</span><span>Grey = not a match</span></div>
 </section>
 <section class="panel">
  <div class="topline"><h1>Your guesses</h1><span class="muted">Clues update after each guess</span></div>
@@ -46,11 +61,11 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding:10px 20px 30
 </section>
 <section class="panel">
  <div class="topline"><h1>Your record</h1><span class="pill">This device</span></div>
- <div class="topline"><div><strong id="played">0</strong><div class="muted">Played</div></div><div><strong id="won">0</strong><div class="muted">Won</div></div><div><strong id="streak">0</strong><div class="muted">Current streak</div></div><div><strong id="best">0</strong><div class="muted">Best streak</div></div></div>
+ <div class="stats"><div class="stat"><strong id="played">0</strong><div class="muted">Played</div></div><div class="stat"><strong id="won">0</strong><div class="muted">Won</div></div><div class="stat"><strong id="streak">0</strong><div class="muted">Current streak</div></div><div class="stat"><strong id="best">0</strong><div class="muted">Best streak</div></div></div>
 </section>
 <section class="panel muted"><strong>How clues work</strong><p>Year signed, goals and appearances show whether the answer is higher or lower. Nationality and position turn green when correct. Goals and appearances are Cardiff City totals, not career totals. Managers are not included.</p></section>
 </main>
-<footer>BLUEBIRDLE · Up the City 💙<br><span id="poolNote"></span></footer>
+<footer>BLUEBIRDLE · UP THE CITY<br><span id="poolNote"></span></footer>
 <script>
 const $=s=>document.querySelector(s);
 const PUZZLE_VERSION='1';
@@ -65,7 +80,7 @@ function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 function tile(value,correct,hint=''){
  return `<div class="tile ${correct?'good':''}"><div class="value">${esc(value)}</div><div class="hint">${correct?'✓':hint||'·'}</div></div>`;
 }
-function higher(v,a){return v===a?'':v<a?'⬆ Higher':'⬇ Lower';}
+function higher(v,a){return v===a?'':v<a?'↑ Higher':'↓ Lower';}
 function renderGuess(p){
  return `<div class="board-row"><div class="player-name">${esc(p.name)}</div>
  ${tile(p.signed,p.signed===answer.signed,higher(p.signed,answer.signed))}
@@ -87,7 +102,7 @@ function showCountdown(){
 }
 function showFinished(win){
  $('#result').hidden=false;
- $('#result').innerHTML=(win?`<h2>BLUEBIRD FOUND! 🐦</h2>You got it in ${guesses.length} ${guesses.length===1?'guess':'guesses'}.`:`<h2>FULL TIME! ⚽</h2>The answer was <strong>${esc(answer.name)}</strong>.`)+`<div class="countdown-label">NEXT BLUEBIRDLE</div><div class="countdown" id="nextTimer">00:00:00</div><p>New puzzle every day at midnight UTC.</p><button class="secondary" id="share">Share result</button>`;
+ $('#result').innerHTML=(win?`<h2>BLUEBIRD FOUND!</h2>You got it in ${guesses.length} ${guesses.length===1?'guess':'guesses'}.`:`<h2>FULL TIME</h2>The answer was <strong>${esc(answer.name)}</strong>.`)+`<div class="countdown-label">NEXT BLUEBIRDLE</div><div class="countdown" id="nextTimer">00:00:00</div><p>New puzzle every day at midnight UTC.</p><button class="secondary" id="share">Share result</button>`;
  $('#share').addEventListener('click',share);showCountdown();
 }
 function loadStats(){try{return JSON.parse(localStorage.getItem('bluebirdle-stats')||'{"played":0,"won":0,"streak":0,"best":0,"last":""}')}catch{return {played:0,won:0,streak:0,best:0,last:''}}}
@@ -102,8 +117,8 @@ function finish(win){
  showFinished(win);saveResult(win);
 }
 function share(){
- const blocks=guesses.map(p=>p.name===answer.name?'🟩🟩🟩🟩🟩':'⬜⬜⬜⬜⬜').join('\\n');
- const text=`Bluebirdle ${today()}\\n${guesses.length}/8\\n${blocks}\\nbluebirdle`;
+ const blocks=guesses.map(p=>p.name===answer.name?'■■■■■':'□□□□□').join('\n');
+ const text=`Bluebirdle ${today()}\n${guesses.length}/8\n${blocks}\nbluebirdle`;
  if(navigator.share) navigator.share({text}).catch(()=>{});
  else navigator.clipboard?.writeText(text).then(()=>alert('Result copied!')).catch(()=>alert(text));
 }
