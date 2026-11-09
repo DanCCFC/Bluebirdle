@@ -110,24 +110,33 @@ function submit(){
  if(p.name===answer.name)finish(true);else if(guesses.length>=8)finish(false);
 }
 async function init(){
+ let dataUrl='';
  try{
-  const r=await fetch('./data/players.json');if(!r.ok)throw new Error('Player data request failed');
+  // Resolve from the current GitHub Pages project path (for example /Bluebirdle/).
+  const pageUrl=new URL(window.location.href);
+  const basePath=pageUrl.pathname.endsWith('/')?pageUrl.pathname:pageUrl.pathname.slice(0,pageUrl.pathname.lastIndexOf('/')+1);
+  dataUrl=new URL(basePath+'data/players.json',pageUrl.origin).toString();
+  const r=await fetch(dataUrl,{cache:'no-store'});
+  if(!r.ok)throw new Error(`Player data request failed: HTTP ${r.status} at ${dataUrl}`);
   players=await r.json();
-  if(!Array.isArray(players)||players.length<2)throw new Error('Add at least two players to players.json');
+  if(!Array.isArray(players)||players.length<2)throw new Error('Player data is not a valid list (at least two players are required).');
   answer=players[dayIndex(today(),players.length)];
   $('#playerList').innerHTML=players.map(p=>`<option value="${esc(p.name)}">`).join('');
   $('#dateLine').textContent=`Daily puzzle · ${today()} (UTC)`;
   $('#poolNote').textContent=`Player pool: ${players.length}. The historical database is still being expanded and checked.`;
   const saved=loadDaily();
   guesses=saved.guesses.map(name=>players.find(p=>p.name===name)).filter(Boolean);
-  $('#history').innerHTML=guesses.length?guesses.slice().reverse().map((x,i)=>renderGuess(x,guesses.length-1-i)).join():'<p class="muted">Your guesses will appear here.</p>';
+  $('#history').innerHTML=guesses.length?guesses.slice().reverse().map((x,i)=>renderGuess(x,guesses.length-1-i)).join(''):'<p class="muted">Your guesses will appear here.</p>';
   $('#counter').textContent=`${Math.max(0,8-guesses.length)} guesses left`;
   if(saved.done){done=true;const win=guesses.some(p=>p.name===answer.name);$('#guessInput').disabled=true;$('#submit').disabled=true;$('#result').hidden=false;$('#result').innerHTML=win?`<h2>BLUEBIRD FOUND! 🐦</h2>You got it in ${guesses.length} guesses.`:`<h2>FULL TIME! ⚽</h2>The answer was <strong>${esc(answer.name)}</strong>.`;}
   if(guesses.length>=8&&!done)finish(false);
   $('#submit').addEventListener('click',submit);
   $('#guessInput').addEventListener('keydown',e=>{if(e.key==='Enter')submit()});
   showStats();
- }catch(e){$('#history').innerHTML='<p>Could not load player data. Please check that data/players.json is present.</p>';console.error(e)}
+ }catch(e){
+  console.error('Bluebirdle failed to initialise:',e);
+  $('#history').textContent=`Bluebirdle could not start: ${e.message||e}. Data file requested: ${dataUrl||'URL could not be determined'}`;
+ }
 }
 init();
 </script>
