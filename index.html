@@ -52,7 +52,7 @@ button:hover:not(:disabled){filter:brightness(1.12);transform:translateY(-1px)}b
 .countdown{background:#070b10;color:#f4f7fb;border-left:7px solid var(--red);border-top:1px solid #283746;border-bottom:1px solid #283746;padding:11px 8px;font-size:clamp(1.8rem,8vw,3rem);font-weight:950;letter-spacing:.06em;font-variant-numeric:tabular-nums}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:14px}.stat{background:#101923;border:1px solid #2b3948;border-radius:7px;padding:13px 8px;text-align:center}.stat strong{font-size:1.5rem;color:#fff}.stat .muted{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
 footer{text-align:center;color:#8091a3;font-size:.78rem;padding:10px 20px 30px;letter-spacing:.04em}
-@media(max-width:560px){header{padding:28px 12px 24px}.tag{font-size:.63rem;letter-spacing:.14em}main{width:calc(100% - 18px);margin:15px auto 36px}.panel{padding:15px;margin:11px 0}.controls{flex-direction:column}.controls button{width:100%}.board{min-width:590px}.board-head,.board-row{grid-template-columns:105px repeat(5,1fr);gap:4px}.player-name,.tile{min-height:61px;padding:6px 3px}.tile .hint{font-size:.65rem}.stats{gap:5px}.stat{padding:10px 4px}.stat strong{font-size:1.25rem}}
+@media(max-width:560px){header{padding:28px 12px 24px}.tag{font-size:.63rem;letter-spacing:.14em}main{width:calc(100% - 18px);margin:15px auto 36px}.panel{padding:15px;margin:11px 0}.controls{flex-direction:column}.controls button{width:100%}.board{min-width:0;width:100%}.board-head,.board-row{grid-template-columns:minmax(68px,1.25fr) repeat(5,minmax(0,1fr));gap:3px}.board-head div{font-size:.52rem;letter-spacing:0;line-height:1.15;overflow-wrap:anywhere;padding:4px 0}.player-name,.tile{min-height:58px;padding:4px 1px;border-radius:4px}.player-name{font-size:.65rem;line-height:1.15;border-left-width:3px}.tile .value{font-size:.68rem;line-height:1.1;overflow-wrap:anywhere}.tile .hint{font-size:.58rem;margin-top:3px}.board-wrap{overflow-x:hidden}.stats{gap:5px}.stat{padding:10px 4px}.stat strong{font-size:1.25rem}}
 </style>
 </head>
 <body>
@@ -72,7 +72,7 @@ footer{text-align:center;color:#8091a3;font-size:.78rem;padding:10px 20px 30px;l
 </section>
 <section class="panel">
  <div class="topline"><h1>Your guesses</h1><span class="muted">Clues update after each guess</span></div>
- <div class="board-wrap"><div class="board"><div class="board-head"><div>Player</div><div>Year debuted</div><div>Nationality</div><div>Position</div><div>Apps</div><div>Goals</div></div><div id="history" aria-live="polite"></div></div></div>
+ <div class="board-wrap"><div class="board"><div class="board-head"><div>Player</div><div>Debut</div><div>Nation</div><div>Position</div><div>Apps</div><div>Goals</div></div><div id="history" aria-live="polite"></div></div></div>
  <div id="result" hidden class="result"></div>
 </section>
 <section class="panel">
