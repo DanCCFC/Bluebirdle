@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123d70">
+<meta name="description" content="Bluebirdle — the daily Cardiff City player guessing game.">
+<title>Bluebirdle — Cardiff City daily guessing game</title>
+<style>
+:root{--blue:#123d70;--blue2:#1d5b9d;--ink:#172334;--muted:#657386;--bg:#f3f6fa;--card:#fff;--line:#dce4ed;--green:#218653;--amber:#d89a22;--red:#c84c4c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:linear-gradient(135deg,#0d2d54,var(--blue2));color:#fff;padding:25px 16px 22px;text-align:center}
+.brand{font-weight:900;font-size:clamp(2rem,7vw,3rem);letter-spacing:.04em}.bird{font-size:1.2em}.tag{color:#d5e6fa;font-size:.9rem;letter-spacing:.12em;font-weight:700}
+main{width:min(760px,100% - 28px);margin:20px auto 48px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 4px 18px #102a4608}
+.topline{display:flex;justify-content:space-between;gap:12px;align-items:center}.pill{background:#e7f0fb;color:var(--blue);font-size:.78rem;font-weight:800;border-radius:99px;padding:6px 10px}
+h1{font-size:1.15rem;margin:0}p{margin:.55rem 0;color:var(--muted)}.muted{color:var(--muted);font-size:.9rem}
+.controls{display:flex;gap:8px;margin-top:14px}.controls input{min-width:0;flex:1;padding:13px 14px;border:1px solid #b9c8d8;border-radius:10px;font:inherit}
+button{border:0;border-radius:10px;background:var(--blue);color:#fff;font-weight:800;font:inherit;padding:12px 17px;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}button.secondary{background:#e8eef5;color:var(--blue)}
+.suggestions{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}.suggestions button{font-size:.86rem;padding:8px 11px;background:#eaf0f6;color:var(--ink);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.legend span{font-size:.78rem;border-radius:7px;padding:5px 8px;background:#f0f3f7;color:#455366}
+.guess{border:1px solid var(--line);border-radius:13px;padding:12px;margin-top:12px}.guesshead{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:9px;font-weight:800}
+.tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.tile{min-width:0;border-radius:8px;padding:9px 5px;text-align:center;background:#edf1f5;overflow-wrap:anywhere}.tile.good{background:var(--green);color:#fff}.tile .label{font-size:.67rem;text-transform:uppercase;letter-spacing:.04em;opacity:.85}.tile .value{font-size:clamp(.78rem,2.7vw,1rem);font-weight:800;margin:3px 0}.tile .hint{font-size:.72rem}
+.result{text-align:center;padding:18px;background:#eef5fc;border-radius:12px;margin-top:14px}.result h2{margin:0 0 5px;color:var(--blue)}
+footer{text-align:center;color:var(--muted);font-size:.8rem;padding:10px 20px 30px}
+@media(max-width:520px){.controls{flex-direction:column}.controls button{width:100%}.panel{padding:14px}.tile{padding:8px 3px}.tile .label{font-size:.58rem}.tile .hint{font-size:.65rem}}
+</style>
+</head>
+<body>
+<header><div class="brand"><span class="bird">🐦</span> BLUEBIRDLE</div><div class="tag">THE DAILY CARDIFF CITY PLAYER GAME</div></header>
+<main>
+<section class="panel">
+ <div class="topline"><h1>Guess the mystery Bluebird</h1><span class="pill" id="counter">8 guesses left</span></div>
+ <p>Guess a Cardiff City first-team player who featured from 2012/13 onwards. You have eight attempts. The same puzzle is served to everyone each day.</p>
+ <div class="controls">
+  <input id="guessInput" list="playerList" autocomplete="off" placeholder="Type a player's name…" aria-label="Player name">
+  <datalist id="playerList"></datalist>
+  <button id="submit">Guess</button>
+ </div>
+ <div class="muted" id="dateLine"></div>
+ <div class="legend"><span>🟩 Correct</span><span>⬆ Higher</span><span>⬇ Lower</span><span>Grey = not a match</span></div>
+</section>
+<section class="panel">
+ <div class="topline"><h1>Your guesses</h1><span class="muted">Clues update after each guess</span></div>
+ <div id="history"><p class="muted">Your guesses will appear here.</p></div>
+ <div id="result" hidden class="result"></div>
+</section>
+<section class="panel">
+ <div class="topline"><h1>Your record</h1><span class="pill">This device</span></div>
+ <div class="topline"><div><strong id="played">0</strong><div class="muted">Played</div></div><div><strong id="won">0</strong><div class="muted">Won</div></div><div><strong id="streak">0</strong><div class="muted">Current streak</div></div><div><strong id="best">0</strong><div class="muted">Best streak</div></div></div>
+</section>
+<section class="panel muted"><strong>How clues work</strong><p>Year signed, goals and appearances show whether the answer is higher or lower. Nationality and position turn green when correct. Goals and appearances are Cardiff City totals, not career totals. Managers are not included.</p></section>
+</main>
+<footer>BLUEBIRDLE · Up the City 💙<br><span id="poolNote"></span></footer>
+<script>
+const $=s=>document.querySelector(s);
+let players=[], guesses=[], done=false, answer=null;
+const today=()=>new Date().toISOString().slice(0,10);
+function dayIndex(date,count){
+  // Stable daily sequence: same date and player list gives everyone the same answer.
+  const n=Number(date.replaceAll('-',''));
+  return (Math.imul(n,2654435761)>>>0)%count;
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function tile(label,value,correct,hint=''){
+ return `<div class="tile ${correct?'good':''}"><div class="label">${label}</div><div class="value">${esc(value)}</div><div class="hint">${correct?'✓':hint}</div></div>`;
+}
+function higher(v,a){return v===a?'':v<a?'⬆ Higher':'⬇ Lower';}
+function renderGuess(p,i){
+ const isAnswer=p.name===answer.name;
+ return `<article class="guess"><div class="guesshead"><span>${i+1}. ${esc(p.name)}</span><span>${isAnswer?'🟩 Correct':'✖ Not yet'}</span></div><div class="tiles">
+ ${tile('Year signed',p.signed,p.signed===answer.signed,higher(p.signed,answer.signed))}
+ ${tile('Nationality',p.nationality,p.nationality===answer.nationality,'✕')}
+ ${tile('Position',p.position,p.position===answer.position,'✕')}
+ ${tile('Goals',p.goals,p.goals===answer.goals,higher(p.goals,answer.goals))}
+ ${tile('Apps',p.appearances,p.appearances===answer.appearances,higher(p.appearances,answer.appearances))}
+ </div></article>`;
+}
+function loadStats(){try{return JSON.parse(localStorage.getItem('bluebirdle-stats')||'{"played":0,"won":0,"streak":0,"best":0,"last":""}')}catch{return {played:0,won:0,streak:0,best:0,last:''}}}
+function saveResult(win){
+ let s=loadStats(),d=today();
+ if(s.last!==d){s.played++;if(win){s.won++;s.streak=s.last===new Date(Date.now()-86400000).toISOString().slice(0,10)?s.streak+1:1;s.best=Math.max(s.best,s.streak)}else{s.streak=0}s.last=d;localStorage.setItem('bluebirdle-stats',JSON.stringify(s))}
+ showStats();
+}
+function showStats(){let s=loadStats();$('#played').textContent=s.played;$('#won').textContent=s.won;$('#streak').textContent=s.streak;$('#best').textContent=s.best}
+function finish(win){
+ done=true;$('#guessInput').disabled=true;$('#submit').disabled=true;
+ $('#result').hidden=false;
+ $('#result').innerHTML=win?`<h2>BLUEBIRD FOUND! 🐦</h2>You got it in ${guesses.length} ${guesses.length===1?'guess':'guesses'}.`:`<h2>FULL TIME! ⚽</h2>The answer was <strong>${esc(answer.name)}</strong>.`;
+ $('#result').innerHTML+=`<p>Come back tomorrow for the next Bluebirdle.</p><button class="secondary" id="share">Share result</button>`;
+ $('#share').addEventListener('click',share);
+ saveResult(win);
+}
+function share(){
+ const blocks=guesses.map(p=>p.name===answer.name?'🟩🟩🟩🟩🟩':'⬜⬜⬜⬜⬜').join('\\n');
+ const text=`Bluebirdle ${today()}\\n${guesses.length}/8\\n${blocks}\\nbluebirdle`;
+ if(navigator.share) navigator.share({text}).catch(()=>{});
+ else navigator.clipboard?.writeText(text).then(()=>alert('Result copied!')).catch(()=>alert(text));
+}
+function submit(){
+ const raw=$('#guessInput').value.trim().toLocaleLowerCase();
+ const p=players.find(x=>x.name.toLocaleLowerCase()===raw);
+ if(!p){alert('Please choose a player from the suggestions.');return}
+ if(guesses.some(x=>x.name===p.name)){alert('You have already guessed that player.');return}
+ if(done)return;
+ guesses.push(p);$('#guessInput').value='';
+ $('#history').innerHTML=guesses.slice().reverse().map((x,i)=>renderGuess(x,guesses.length-1-i)).join('');
+ $('#counter').textContent=`${8-guesses.length} guesses left`;
+ if(p.name===answer.name)finish(true);else if(guesses.length>=8)finish(false);
+}
+async function init(){
+ try{
+  const r=await fetch('./data/players.json');players=await r.json();
+  if(players.length<2)throw new Error('Add at least two players to players.json');
+  answer=players[dayIndex(today(),players.length)];
+  $('#playerList').innerHTML=players.map(p=>`<option value="${esc(p.name)}">`).join('');
+  $('#dateLine').textContent=`Daily puzzle · ${today()} (UTC)`;
+  $('#poolNote').textContent=`Starter player pool: ${players.length} entries. Expand and verify the database before a full public launch.`;
+  $('#submit').addEventListener('click',submit);
+  $('#guessInput').addEventListener('keydown',e=>{if(e.key==='Enter')submit()});
+  showStats();
+ }catch(e){$('#history').innerHTML='<p>Could not load player data. Please check that data/players.json is present.</p>';console.error(e)}
+}
+init();
+</script>
+</body></html>
