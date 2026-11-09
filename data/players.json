@@ -1,1 +1,25 @@
-[]
+[
+  {"name":"Nathan Trott","debut":2025,"nationality":"Bermuda","position":"Goalkeeper","appearances":56,"goals":0},
+  {"name":"Will Fish","debut":2024,"nationality":"England","position":"Defender","appearances":65,"goals":1},
+  {"name":"Joel Bagan","debut":2020,"nationality":"Ireland","position":"Defender","appearances":125,"goals":4},
+  {"name":"Gabriel Osho","debut":2025,"nationality":"Nigeria","position":"Defender","appearances":29,"goals":0},
+  {"name":"Krystian Bielik","debut":2026,"nationality":"Poland","position":"Defender","appearances":8,"goals":0},
+  {"name":"Jack Moylan","debut":2026,"nationality":"Ireland","position":"Midfielder","appearances":15,"goals":10},
+  {"name":"Yousef Salech","debut":2025,"nationality":"Denmark","position":"Attacker","appearances":66,"goals":27},
+  {"name":"Rubin Colwill","debut":2021,"nationality":"Wales","position":"Midfielder","appearances":178,"goals":16},
+  {"name":"Ollie Tanner","debut":2022,"nationality":"England","position":"Attacker","appearances":108,"goals":10},
+  {"name":"David Turnbull","debut":2024,"nationality":"Scotland","position":"Midfielder","appearances":87,"goals":3},
+  {"name":"Chris Willock","debut":2024,"nationality":"England","position":"Attacker","appearances":89,"goals":10},
+  {"name":"Alex Robertson","debut":2024,"nationality":"Australia","position":"Midfielder","appearances":85,"goals":10},
+  {"name":"Calum Scanlon","debut":2026,"nationality":"England","position":"Defender","appearances":22,"goals":0},
+  {"name":"Joel Colwill","debut":2023,"nationality":"Wales","position":"Midfielder","appearances":56,"goals":6},
+  {"name":"Robert Tankiewicz","debut":2025,"nationality":"Wales","position":"Midfielder","appearances":1,"goals":0},
+  {"name":"Perry Ng","debut":2021,"nationality":"Singapore","position":"Defender","appearances":224,"goals":16},
+  {"name":"Isaak Davies","debut":2021,"nationality":"Wales","position":"Attacker","appearances":84,"goals":10},
+  {"name":"Noah Anyadike","debut":2026,"nationality":"Wales","position":"Defender","appearances":1,"goals":0},
+  {"name":"Ronan Kpakio","debut":2024,"nationality":"Wales","position":"Defender","appearances":45,"goals":2},
+  {"name":"Cian Ashford","debut":2023,"nationality":"Wales","position":"Attacker","appearances":84,"goals":9},
+  {"name":"Callum Robinson","debut":2022,"nationality":"Ireland","position":"Attacker","appearances":125,"goals":28},
+  {"name":"Dylan Lawlor","debut":2025,"nationality":"Wales","position":"Defender","appearances":36,"goals":2},
+  {"name":"Charlie Holt","debut":2026,"nationality":"England","position":"Midfielder","appearances":1,"goals":0}
+]
