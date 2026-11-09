@@ -36,7 +36,7 @@ button:hover:not(:disabled){filter:brightness(1.12);transform:translateY(-1px)}b
 .board-head{margin-bottom:8px}.board-head div{font-size:.67rem;font-weight:900;text-transform:uppercase;letter-spacing:.09em;text-align:center;color:#aab7c5;padding:5px 2px}
 .board-row{margin-bottom:6px}.player-name,.tile{min-width:0;min-height:67px;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7px 5px;overflow-wrap:anywhere}
 .player-name{background:#242f3c;border-left:5px solid #397fb5;font-weight:850;color:#f2f5f9}.tile{background:var(--tile);color:#f4f7fb;border:1px solid #344253}.tile.good{background:var(--green);border-color:#1e9a5c;color:#fff}
-.tile .value{font-size:clamp(.8rem,2.7vw,1.02rem);font-weight:850}.tile .hint{font-size:.7rem;font-weight:850;margin-top:3px;color:#d3dfeb}
+.tile .value{font-size:clamp(.8rem,2.7vw,1.02rem);font-weight:850}.tile .flag{display:block;font-size:1.15rem;line-height:1;margin:0 0 3px}.tile .hint{font-size:.7rem;font-weight:850;margin-top:3px;color:#d3dfeb}
 @keyframes tile-reveal{0%{opacity:0;transform:perspective(500px) rotateX(88deg) scale(.94)}65%{opacity:1;transform:perspective(500px) rotateX(-8deg) scale(1.015)}100%{opacity:1;transform:perspective(500px) rotateX(0) scale(1)}}
 .board-row.reveal .player-name,.board-row.reveal .tile{opacity:0;transform-origin:center bottom;animation:tile-reveal .48s cubic-bezier(.2,.75,.25,1) forwards}
 .board-row.reveal .player-name{animation-delay:0ms}
@@ -52,7 +52,7 @@ button:hover:not(:disabled){filter:brightness(1.12);transform:translateY(-1px)}b
 .countdown{background:#070b10;color:#f4f7fb;border-left:7px solid var(--red);border-top:1px solid #283746;border-bottom:1px solid #283746;padding:11px 8px;font-size:clamp(1.8rem,8vw,3rem);font-weight:950;letter-spacing:.06em;font-variant-numeric:tabular-nums}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:14px}.stat{background:#101923;border:1px solid #2b3948;border-radius:7px;padding:13px 8px;text-align:center}.stat strong{font-size:1.5rem;color:#fff}.stat .muted{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
 footer{text-align:center;color:#8091a3;font-size:.78rem;padding:10px 20px 30px;letter-spacing:.04em}
-@media(max-width:560px){header{padding:28px 12px 24px}.tag{font-size:.63rem;letter-spacing:.14em}main{width:calc(100% - 18px);margin:15px auto 36px}.panel{padding:15px;margin:11px 0}.controls{flex-direction:column;align-items:stretch}.autocomplete-wrap{width:100%;flex:initial}.controls input{display:block;width:100%}.controls button{width:100%}.board{min-width:0;width:100%}.board-head,.board-row{grid-template-columns:minmax(68px,1.25fr) repeat(5,minmax(0,1fr));gap:3px}.board-head div{font-size:.52rem;letter-spacing:0;line-height:1.15;overflow-wrap:anywhere;padding:4px 0}.player-name,.tile{min-height:58px;padding:4px 1px;border-radius:4px}.player-name{font-size:.65rem;line-height:1.15;border-left-width:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tile .value{font-size:clamp(.44rem,2.05vw,.58rem);line-height:1.1;white-space:nowrap;overflow:visible;text-overflow:clip;max-width:100%;letter-spacing:-.035em}.tile .hint{font-size:.54rem;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:clip;max-width:100%;margin-top:3px}.board-wrap{overflow-x:hidden}.stats{gap:5px}.stat{padding:10px 4px}.stat strong{font-size:1.25rem}}
+@media(max-width:560px){header{padding:28px 12px 24px}.tag{font-size:.63rem;letter-spacing:.14em}main{width:calc(100% - 18px);margin:15px auto 36px}.panel{padding:15px;margin:11px 0}.controls{flex-direction:column;align-items:stretch}.autocomplete-wrap{width:100%;flex:initial}.controls input{display:block;width:100%}.controls button{width:100%}.board{min-width:0;width:100%}.board-head,.board-row{grid-template-columns:minmax(68px,1.25fr) repeat(5,minmax(0,1fr));gap:3px}.board-head div{font-size:.52rem;letter-spacing:0;line-height:1.15;overflow-wrap:anywhere;padding:4px 0}.player-name,.tile{min-height:58px;padding:4px 1px;border-radius:4px}.player-name{font-size:.65rem;line-height:1.15;border-left-width:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tile .value{font-size:clamp(.44rem,2.05vw,.58rem);line-height:1.1;white-space:nowrap;overflow:visible;text-overflow:clip;max-width:100%;letter-spacing:-.035em}.tile .flag{font-size:.95rem;margin-bottom:2px}.tile .hint{font-size:.54rem;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:clip;max-width:100%;margin-top:3px}.board-wrap{overflow-x:hidden}.stats{gap:5px}.stat{padding:10px 4px}.stat strong{font-size:1.25rem}}
 </style>
 </head>
 <body>
@@ -93,14 +93,22 @@ function dayIndex(date,count){return count?stableHash('bluebirdle:'+date+':'+PUZ
 function loadDaily(){try{const v=JSON.parse(localStorage.getItem(storageKey())||'null');if(v&&Array.isArray(v.guesses))return v}catch{}return {guesses:[],done:false,won:false}}
 function saveDaily(){localStorage.setItem(storageKey(),JSON.stringify({guesses:guesses.map(p=>p.name),done,won:done&&guesses.some(p=>p.name===answer.name)}))}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function tile(value,correct,hint=''){
- return `<div class="tile ${correct?'good':''}"><div class="value">${esc(value)}</div><div class="hint">${correct?'✓':hint||'·'}</div></div>`;
+const nationalityFlags={
+ 'Bermuda':'🇧🇲','England':'🏴\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}',
+ 'Ireland':'🇮🇪','Nigeria':'🇳🇬','Poland':'🇵🇱','Denmark':'🇩🇰',
+ 'Wales':'🏴\u{E0067}\u{E0062}\u{E0077}\u{E006C}\u{E0073}\u{E007F}',
+ 'Scotland':'🏴\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E0074}\u{E007F}',
+ 'Australia':'🇦🇺','Singapore':'🇸🇬'
+};
+function tile(value,correct,hint='',flag=''){
+ const flagMarkup=flag? `<span class="flag" aria-hidden="true">${flag}</span>`:'';
+ return `<div class="tile ${correct?'good':''}"><div class="value">${flagMarkup}${esc(value)}</div><div class="hint">${correct?'✓':hint||'·'}</div></div>`;
 }
 function higher(v,a){return v===a?'':v<a?'↑ Higher':'↓ Lower';}
 function renderGuess(p,animate=false){
  return `<div class="board-row${animate?' reveal':''}"><div class="player-name">${esc(p.name)}</div>
  ${tile(p.debut,p.debut===answer.debut,higher(p.debut,answer.debut))}
- ${tile(p.nationality,p.nationality===answer.nationality,'✕')}
+ ${tile(p.nationality,p.nationality===answer.nationality,'✕',nationalityFlags[p.nationality]||'')}
  ${tile(p.position,p.position===answer.position,'✕')}
  ${tile(p.appearances,p.appearances===answer.appearances,higher(p.appearances,answer.appearances))}
  ${tile(p.goals,p.goals===answer.goals,higher(p.goals,answer.goals))}
