@@ -60,7 +60,7 @@ footer{text-align:center;color:#8091a3;font-size:.78rem;padding:10px 20px 30px;l
 <main>
 <section class="panel">
  <div class="topline"><h1>Guess the mystery Bluebird</h1><span class="pill" id="counter">8 guesses left</span></div>
- <p>Guess a Cardiff City first-team player who featured from 2012/13 onwards. You have eight attempts. The same puzzle is served to everyone each day.</p>
+ <p>Guess a player from Cardiff City’s 2026/27 squad. You have eight attempts. The same puzzle is served to everyone each day. Earlier seasons will be added in future.</p>
  <div class="controls">
   <div class="autocomplete-wrap">
    <input id="guessInput" autocomplete="off" placeholder="Start typing a player's name…" aria-label="Player name" aria-autocomplete="list" aria-controls="playerSuggestions" aria-expanded="false" role="combobox">
@@ -69,7 +69,6 @@ footer{text-align:center;color:#8091a3;font-size:.78rem;padding:10px 20px 30px;l
   <button id="submit">Guess</button>
  </div>
  <div class="muted" id="dateLine"></div>
- <div class="legend"><span>Green = correct</span><span>↑ Higher</span><span>↓ Lower</span><span>Grey = not a match</span></div>
 </section>
 <section class="panel">
  <div class="topline"><h1>Your guesses</h1><span class="muted">Clues update after each guess</span></div>
@@ -187,7 +186,7 @@ async function init(){
   if(!Array.isArray(players)||players.length<2)throw new Error('Player data is not a valid list (at least two players are required).');
   answer=players[dayIndex(today(),players.length)];
   $('#dateLine').textContent=`Daily puzzle · ${today()} (UTC)`;
-  $('#poolNote').textContent=`Player pool: ${players.length}. The historical database is still being expanded and checked.`;
+  $('#poolNote').textContent=`2026/27 season only · ${players.length} players in the current pool. Earlier seasons will be added later.`;
   const saved=loadDaily();
   guesses=saved.guesses.map(name=>players.find(p=>p.name===name)).filter(Boolean);
   renderBoard();
