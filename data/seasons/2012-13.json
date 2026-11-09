@@ -1,0 +1,350 @@
+{
+  "season": "2012/13",
+  "source": "https://www.11v11.com/teams/cardiff-city/tab/players/season/2013/",
+  "sourceNotes": "11v11 season squad table. A and S have been recorded as league starts and substitute appearances; goals are league goals. This is a season-level eligibility register, not yet the player's all-competition Cardiff career totals. Blank statistics in the source are recorded as zero. Only players with at least one start or substitute appearance are included.",
+  "qualifyingPlayerCount": 38,
+  "players": [
+    {
+      "name": "Leon Barnett",
+      "nationality": "England",
+      "position": "Defender",
+      "leagueStarts": 8,
+      "leagueSubApps": 0,
+      "leagueAppearances": 8,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Craig Bellamy",
+      "nationality": "Wales",
+      "position": "Forward",
+      "leagueStarts": 28,
+      "leagueSubApps": 5,
+      "leagueAppearances": 33,
+      "leagueGoals": 4
+    },
+    {
+      "name": "Kim Bo-kyung",
+      "nationality": "South Korea",
+      "position": "Midfielder",
+      "leagueStarts": 20,
+      "leagueSubApps": 8,
+      "leagueAppearances": 28,
+      "leagueGoals": 2
+    },
+    {
+      "name": "Fraizer Campbell",
+      "nationality": "England",
+      "position": "Forward",
+      "leagueStarts": 9,
+      "leagueSubApps": 3,
+      "leagueAppearances": 12,
+      "leagueGoals": 7
+    },
+    {
+      "name": "Matthew Connolly",
+      "nationality": "England",
+      "position": "Defender",
+      "leagueStarts": 36,
+      "leagueSubApps": 0,
+      "leagueAppearances": 36,
+      "leagueGoals": 5
+    },
+    {
+      "name": "Craig Conway",
+      "nationality": "Scotland",
+      "position": "Midfielder",
+      "leagueStarts": 22,
+      "leagueSubApps": 6,
+      "leagueAppearances": 28,
+      "leagueGoals": 2
+    },
+    {
+      "name": "Luke Coulson",
+      "nationality": "England",
+      "position": "Defender",
+      "leagueStarts": 0,
+      "leagueSubApps": 1,
+      "leagueAppearances": 1,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Don Cowie",
+      "nationality": "Scotland",
+      "position": "Midfielder",
+      "leagueStarts": 15,
+      "leagueSubApps": 10,
+      "leagueAppearances": 25,
+      "leagueGoals": 2
+    },
+    {
+      "name": "Rudy Gestede",
+      "nationality": "Benin",
+      "position": "Forward",
+      "leagueStarts": 5,
+      "leagueSubApps": 22,
+      "leagueAppearances": 27,
+      "leagueGoals": 5
+    },
+    {
+      "name": "Aron Gunnarsson",
+      "nationality": "Iceland",
+      "position": "Defender/Midfielder",
+      "leagueStarts": 35,
+      "leagueSubApps": 10,
+      "leagueAppearances": 45,
+      "leagueGoals": 8
+    },
+    {
+      "name": "Kadeem Harris",
+      "nationality": "England",
+      "position": "Midfielder",
+      "leagueStarts": 1,
+      "leagueSubApps": 0,
+      "leagueAppearances": 1,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Heidar Helguson",
+      "nationality": "Iceland",
+      "position": "Forward",
+      "leagueStarts": 28,
+      "leagueSubApps": 11,
+      "leagueAppearances": 39,
+      "leagueGoals": 9
+    },
+    {
+      "name": "Mark Hudson",
+      "nationality": "England",
+      "position": "Defender",
+      "leagueStarts": 33,
+      "leagueSubApps": 0,
+      "leagueAppearances": 33,
+      "leagueGoals": 4
+    },
+    {
+      "name": "Nat Jarvis",
+      "nationality": "Antigua and Barbuda",
+      "position": "Forward",
+      "leagueStarts": 1,
+      "leagueSubApps": 1,
+      "leagueAppearances": 2,
+      "leagueGoals": 1
+    },
+    {
+      "name": "Declan John",
+      "nationality": "Wales",
+      "position": "Midfielder",
+      "leagueStarts": 2,
+      "leagueSubApps": 0,
+      "leagueAppearances": 2,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Dekil Keinan",
+      "nationality": "Israel",
+      "position": "Defender",
+      "leagueStarts": 1,
+      "leagueSubApps": 0,
+      "leagueAppearances": 1,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Kerim Frei",
+      "nationality": "Turkey",
+      "position": "Midfielder",
+      "leagueStarts": 1,
+      "leagueSubApps": 2,
+      "leagueAppearances": 3,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Filip Kiss",
+      "nationality": "Slovakia",
+      "position": "Midfielder",
+      "leagueStarts": 1,
+      "leagueSubApps": 2,
+      "leagueAppearances": 3,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Simon Lappin",
+      "nationality": "Scotland",
+      "position": "Midfielder",
+      "leagueStarts": 2,
+      "leagueSubApps": 0,
+      "leagueAppearances": 2,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Joe Lewis",
+      "nationality": "England",
+      "position": "Goalkeeper",
+      "leagueStarts": 2,
+      "leagueSubApps": 0,
+      "leagueAppearances": 2,
+      "leagueGoals": 0
+    },
+    {
+      "name": "David Marshall",
+      "nationality": "Scotland",
+      "position": "Goalkeeper",
+      "leagueStarts": 46,
+      "leagueSubApps": 0,
+      "leagueAppearances": 46,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Joe Mason",
+      "nationality": "Republic of Ireland",
+      "position": "Forward",
+      "leagueStarts": 13,
+      "leagueSubApps": 16,
+      "leagueAppearances": 29,
+      "leagueGoals": 6
+    },
+    {
+      "name": "Nicky Maynard",
+      "nationality": "England",
+      "position": "Forward",
+      "leagueStarts": 3,
+      "leagueSubApps": 1,
+      "leagueAppearances": 4,
+      "leagueGoals": 1
+    },
+    {
+      "name": "Kevin McNaughton",
+      "nationality": "Scotland",
+      "position": "Defender",
+      "leagueStarts": 25,
+      "leagueSubApps": 3,
+      "leagueAppearances": 28,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Stephen McPhail",
+      "nationality": "Republic of Ireland",
+      "position": "Midfielder",
+      "leagueStarts": 2,
+      "leagueSubApps": 0,
+      "leagueAppearances": 2,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Jordon Mutch",
+      "nationality": "England",
+      "position": "Midfielder",
+      "leagueStarts": 18,
+      "leagueSubApps": 5,
+      "leagueAppearances": 23,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Craig Noone",
+      "nationality": "England",
+      "position": "Midfielder",
+      "leagueStarts": 25,
+      "leagueSubApps": 7,
+      "leagueAppearances": 32,
+      "leagueGoals": 7
+    },
+    {
+      "name": "Ben Nugent",
+      "nationality": "England",
+      "position": "Defender",
+      "leagueStarts": 9,
+      "leagueSubApps": 5,
+      "leagueAppearances": 14,
+      "leagueGoals": 1
+    },
+    {
+      "name": "Tommy O'Sullivan",
+      "nationality": "Wales",
+      "position": "Midfielder",
+      "leagueStarts": 0,
+      "leagueSubApps": 2,
+      "leagueAppearances": 2,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Deji Oshilaja",
+      "nationality": "England",
+      "position": "Defender",
+      "leagueStarts": 2,
+      "leagueSubApps": 0,
+      "leagueAppearances": 2,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Joe Ralls",
+      "nationality": "England",
+      "position": "Midfielder",
+      "leagueStarts": 3,
+      "leagueSubApps": 3,
+      "leagueAppearances": 6,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Kevin Sainte-Luce",
+      "nationality": "France",
+      "position": "Midfielder",
+      "leagueStarts": 1,
+      "leagueSubApps": 0,
+      "leagueAppearances": 1,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Tommy Smith",
+      "nationality": "England",
+      "position": "Midfielder/Forward",
+      "leagueStarts": 19,
+      "leagueSubApps": 5,
+      "leagueAppearances": 24,
+      "leagueGoals": 1
+    },
+    {
+      "name": "Andrew Taylor",
+      "nationality": "England",
+      "position": "Defender",
+      "leagueStarts": 43,
+      "leagueSubApps": 0,
+      "leagueAppearances": 43,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Ben Turner",
+      "nationality": "England",
+      "position": "Defender",
+      "leagueStarts": 30,
+      "leagueSubApps": 1,
+      "leagueAppearances": 31,
+      "leagueGoals": 1
+    },
+    {
+      "name": "Etien Velikonja",
+      "nationality": "Slovenia",
+      "position": "Forward",
+      "leagueStarts": 2,
+      "leagueSubApps": 2,
+      "leagueAppearances": 4,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Theo Wharton",
+      "nationality": "St Kitts and Nevis",
+      "position": "Midfielder",
+      "leagueStarts": 0,
+      "leagueSubApps": 1,
+      "leagueAppearances": 1,
+      "leagueGoals": 0
+    },
+    {
+      "name": "Peter Whittingham",
+      "nationality": "England",
+      "position": "Midfielder",
+      "leagueStarts": 37,
+      "leagueSubApps": 3,
+      "leagueAppearances": 40,
+      "leagueGoals": 8
+    }
+  ]
+}
