@@ -64,14 +64,14 @@ footer{text-align:center;color:#8091a3;font-size:.78rem;padding:10px 20px 30px;l
 </section>
 <section class="panel">
  <div class="topline"><h1>Your guesses</h1><span class="muted">Clues update after each guess</span></div>
- <div class="board-wrap"><div class="board"><div class="board-head"><div>Player</div><div>Year signed</div><div>Nationality</div><div>Position</div><div>Goals</div><div>Apps</div></div><div id="history" aria-live="polite"></div></div></div>
+ <div class="board-wrap"><div class="board"><div class="board-head"><div>Player</div><div>Year debuted</div><div>Nationality</div><div>Position</div><div>Apps</div><div>Goals</div></div><div id="history" aria-live="polite"></div></div></div>
  <div id="result" hidden class="result"></div>
 </section>
 <section class="panel">
  <div class="topline"><h1>Your record</h1><span class="pill">This device</span></div>
  <div class="stats"><div class="stat"><strong id="played">0</strong><div class="muted">Played</div></div><div class="stat"><strong id="won">0</strong><div class="muted">Won</div></div><div class="stat"><strong id="streak">0</strong><div class="muted">Current streak</div></div><div class="stat"><strong id="best">0</strong><div class="muted">Best streak</div></div></div>
 </section>
-<section class="panel muted"><strong>How clues work</strong><p>Year signed, goals and appearances show whether the answer is higher or lower. Nationality and position turn green when correct. Goals and appearances are Cardiff City totals, not career totals. Managers are not included.</p></section>
+<section class="panel muted"><strong>How clues work</strong><p>Year debuted, goals and appearances show whether the answer is higher or lower. Nationality and position turn green when correct. Appearances and goals are Cardiff City totals, not career totals. Managers are not included.</p></section>
 </main>
 <footer>BLUEBIRDLE · UP THE CITY<br><span id="poolNote"></span></footer>
 <script>
@@ -91,11 +91,11 @@ function tile(value,correct,hint=''){
 function higher(v,a){return v===a?'':v<a?'↑ Higher':'↓ Lower';}
 function renderGuess(p){
  return `<div class="board-row"><div class="player-name">${esc(p.name)}</div>
- ${tile(p.signed,p.signed===answer.signed,higher(p.signed,answer.signed))}
+ ${tile(p.debut,p.debut===answer.debut,higher(p.debut,answer.debut))}
  ${tile(p.nationality,p.nationality===answer.nationality,'✕')}
  ${tile(p.position,p.position===answer.position,'✕')}
- ${tile(p.goals,p.goals===answer.goals,higher(p.goals,answer.goals))}
  ${tile(p.appearances,p.appearances===answer.appearances,higher(p.appearances,answer.appearances))}
+ ${tile(p.goals,p.goals===answer.goals,higher(p.goals,answer.goals))}
  </div>`;
 }
 function renderBoard(){
