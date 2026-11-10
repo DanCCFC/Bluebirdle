@@ -59,7 +59,7 @@ footer{text-align:center;color:#8091a3;font-size:.78rem;padding:10px 20px 30px;l
 <header><div class="brand">BLUEBIRDLE</div><div class="tag">THE DAILY CARDIFF CITY PLAYER GAME</div></header>
 <main>
 <section class="panel">
- <div class="topline"><h1>Guess the mystery Bluebird</h1><span class="pill" id="counter">8 guesses left</span></div>
+ <div class="topline"><h1>Guess the mystery Bluebird</h1><span class="pill" id="counter">5 guesses left</span></div>
  <p>Guess a player from Cardiff City’s 2026/27 squad. You have eight attempts. The same puzzle is served to everyone each day. Earlier seasons will be added in future.</p>
  <div class="controls">
   <div class="autocomplete-wrap">
@@ -121,7 +121,7 @@ function renderGuess(p,animate=false){
 }
 function renderBoard(animateLatest=false){
  const rows=guesses.map((p,i)=>renderGuess(p,animateLatest&&i===guesses.length-1));
- while(rows.length<8){const n=rows.length+1;rows.push(`<div class="board-row"><div class="player-name empty">Guess ${n}</div>${Array.from({length:5},()=>'<div class="tile empty"><div class="value">—</div></div>').join('')}</div>`);}
+ while(rows.length<5){const n=rows.length+1;rows.push(`<div class="board-row"><div class="player-name empty">Guess ${n}</div>${Array.from({length:5},()=>'<div class="tile empty"><div class="value">—</div></div>').join('')}</div>`);}
  $('#history').innerHTML=rows.join('');
 }
 let countdownTimer=null;
@@ -147,7 +147,7 @@ function finish(win){
 }
 function share(){
  const blocks=guesses.map(p=>p.name===answer.name?'■■■■■':'□□□□□').join('\n');
- const text=`Bluebirdle ${today()}\n${guesses.length}/8\n${blocks}\nbluebirdle`;
+ const text=`Bluebirdle ${today()}\n${guesses.length}/5\n${blocks}\nbluebirdle`;
  if(navigator.share) navigator.share({text}).catch(()=>{});
  else navigator.clipboard?.writeText(text).then(()=>alert('Result copied!')).catch(()=>alert(text));
 }
@@ -184,7 +184,7 @@ function submit(){
  guesses.push(p);saveDaily();$('#guessInput').value='';closeSuggestions();
  renderBoard(true);
  $('#counter').textContent=`${8-guesses.length} guesses left`;
- if(p.name===answer.name)finish(true);else if(guesses.length>=8)finish(false);
+ if(p.name===answer.name)finish(true);else if(guesses.length>=5)finish(false);
 }
 async function init(){
  let dataUrl='';
@@ -203,9 +203,9 @@ async function init(){
   const saved=loadDaily();
   guesses=saved.guesses.map(name=>players.find(p=>p.name===name)).filter(Boolean);
   renderBoard();
-  $('#counter').textContent=`${Math.max(0,8-guesses.length)} guesses left`;
+  $('#counter').textContent=`${Math.max(0,5-guesses.length)} guesses left`;
   if(saved.done){done=true;const win=guesses.some(p=>p.name===answer.name);$('#guessInput').disabled=true;$('#submit').disabled=true;showFinished(win);}
-  if(guesses.length>=8&&!done)finish(false);
+  if(guesses.length>=5&&!done)finish(false);
   $('#submit').addEventListener('click',submit);
   $('#guessInput').addEventListener('input',updateSuggestions);
   $('#guessInput').addEventListener('keydown',e=>{
