@@ -1,52 +1,77 @@
 # Bluebirdle
 
-A static, daily Cardiff City player guessing game.
+**Bluebirdle** is a daily Cardiff City FC player guessing game. Work out the mystery Bluebird using clues about their Cardiff City career.
+
+**Play the game:** https://danccfc.github.io/Bluebirdle/
+
+## How to play
+
+- A new mystery player is selected each day.
+- Everyone gets the same mystery player for that UTC date.
+- You have **five guesses** to find the answer.
+- Start typing a player's name and select them from the suggestions.
+- After each guess, the clue tiles show how your player compares with the mystery player.
+
+## The clues
+
+Each guess is compared across five categories:
+
+| Clue | What it means |
+| --- | --- |
+| **Year debuted** | The year the player made their Cardiff City first-team debut. |
+| **Nationality** | The player's nationality, displayed with a flag. |
+| **Position** | The player's playing position. |
+| **Appearances** | Competitive first-team appearances for Cardiff City. |
+| **Goals** | Competitive first-team goals for Cardiff City. |
+
+For year debuted, appearances and goals, arrows indicate whether the mystery player's value is higher or lower than your guess. Nationality and position are marked as correct when they match.
+
+Appearances and goals are **Cardiff City totals**, not career totals across all clubs.
+
+## Daily puzzle and stats
+
+- The puzzle resets at **00:00 UTC**.
+- Your guesses for the current puzzle are saved in your browser, so they remain after a refresh.
+- Played, wins and streak statistics are stored locally in your browser on that device.
+- When the game ends, you can share your result.
+
+## Player pool and data
+
+The current pool is the **2026/27 Cardiff City squad**. Earlier seasons are planned for future updates.
+
+Player information is maintained in [`data/players.json`](data/players.json). Each player entry contains:
+
+- `name`
+- `debut`
+- `nationality`
+- `position`
+- `appearances`
+- `goals`
+
+The appearance and goal figures are Cardiff City competitive first-team totals.
 
 ## Run locally
 
-Because the game loads JSON with `fetch()`, serve this folder over HTTP rather than opening `index.html` directly. For example:
+Bluebirdle is a static site and does not require a build step. The game fetches its player data from a JSON file, so serve the project over HTTP rather than opening `index.html` directly.
+
+If Python is installed, run this from the repository directory:
 
 ```bash
 python -m http.server 8000
 ```
 
-Then visit `http://localhost:8000`.
+Then open http://localhost:8000.
 
-## Publish with GitHub Pages
+## Hosting
 
-1. In this repository, open **Settings → Pages**.
-2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select `main` and `/(root)`, then save.
-4. GitHub Pages will publish the site at the URL shown in Settings → Pages.
+The live game is hosted using GitHub Pages:
 
-## Daily puzzle
+https://danccfc.github.io/Bluebirdle/
 
-- Everyone gets the same answer for the same UTC calendar date and the same version of `data/players.json`.
-- A new answer is selected at 00:00 UTC.
-- Guesses and results persist in the visitor's browser across refreshes for that daily puzzle.
-- Streak and record data is stored locally in the visitor's browser.
+## Known limitation
 
-## Player data schema
+The daily answer is selected in the browser from the public `data/players.json` file. Visitors can inspect that file and work out the answer if they want to. Keeping the answer secret would require moving answer selection to a server-side service.
 
-Each entry in `data/players.json` must contain:
+## Disclaimer
 
-- `name`
-- `signed`: year the player first joined Cardiff (use their first arrival, including a loan, consistently)
-- `nationality`
-- `position`: `Goalkeeper`, `Defender`, `Midfielder` or `Forward`
-- `goals`: competitive first-team goals for Cardiff City
-- `appearances`: competitive first-team appearances for Cardiff City
-
-Managers are excluded. Include first-team players who featured from 2012/13 onwards, including loanees.
-
-## Important data status
-
-The current JSON is only a **starter sample**, not a complete or fully verified Cardiff City player database. Do not describe this as a complete historical game until the player list and every statistic have been checked against reliable season-by-season records. In particular, confirm that the signing year and totals are Cardiff-specific and use one consistent competition scope.
-
-## Static-site limitation
-
-The daily answer is selected in the browser from the public JSON file. This means a technically curious visitor can inspect the file and work out the answer for the day. A server-side function/database would be needed to keep the answer secret. For a public hobby game, this static version is simple to host and has no account or server costs.
-
-## Updating the player pool
-
-Edit `data/players.json`. The daily answer schedule is deterministic for a given date and list order; changing or reordering the player list changes the selected answer. Once a public daily schedule starts, avoid changing the list during a live run, or version and announce the reset.
+Bluebirdle is an independent, unofficial fan-made game. It is not affiliated with, endorsed by, or connected to Cardiff City Football Club.
