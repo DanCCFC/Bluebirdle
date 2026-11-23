@@ -21,5 +21,14 @@
   {"name":"Cian Ashford","debut":2023,"nationality":"Wales","position":"Attacker","appearances":84,"goals":9},
   {"name":"Callum Robinson","debut":2022,"nationality":"Ireland","position":"Attacker","appearances":125,"goals":28},
   {"name":"Dylan Lawlor","debut":2025,"nationality":"Wales","position":"Defender","appearances":36,"goals":2},
-  {"name":"Charlie Holt","debut":2026,"nationality":"England","position":"Midfielder","appearances":1,"goals":0}
+  {"name":"Charlie Holt","debut":2026,"nationality":"England","position":"Midfielder","appearances":1,"goals":0},
+  {"name":"Calum Chambers","debut":2024,"nationality":"England","position":"Defender","appearances":66,"goals":4},
+  {"name":"Ryan Wintle","debut":2021,"nationality":"England","position":"Midfielder","appearances":150,"goals":5},
+  {"name":"Omari Kellyman","debut":2025,"nationality":"England","position":"Midfielder","appearances":36,"goals":11},
+  {"name":"Eli King","debut":2021,"nationality":"England","position":"Midfielder","appearances":6,"goals":0},
+  {"name":"Jesper Daland","debut":2024,"nationality":"Norway","position":"Defender","appearances":21,"goals":0},
+  {"name":"Dakarai Mafico","debut":2025,"nationality":"Wales","position":"Midfielder","appearances":1,"goals":0},
+  {"name":"Tanatswa Nyakuhwa","debut":2025,"nationality":"Wales","position":"Attacker","appearances":4,"goals":0},
+  {"name":"Kion Etete","debut":2022,"nationality":"England","position":"Attacker","appearances":56,"goals":6},
+  {"name":"Michael Reindorf","debut":2024,"nationality":"England","position":"Attacker","appearances":2,"goals":0}
 ]
