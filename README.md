@@ -50,18 +50,6 @@ Player information is maintained in [`data/players.json`](data/players.json). Ea
 
 The appearance and goal figures are Cardiff City competitive first-team totals.
 
-## Run locally
-
-Bluebirdle is a static site and does not require a build step. The game fetches its player data from a JSON file, so serve the project over HTTP rather than opening `index.html` directly.
-
-If Python is installed, run this from the repository directory:
-
-```bash
-python -m http.server 8000
-```
-
-Then open http://localhost:8000.
-
 ## Hosting
 
 The live game is hosted using GitHub Pages:
